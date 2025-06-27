@@ -11,27 +11,42 @@ class Node {
 
 class legalMoves {
     constructor(x, y) {
-        const moves = [
-            [this.x = x + 1, this.y = y + 2],
-            [this.x = x + 1, this.y = y - 2],
-            [this.x = x - 1, this.y = y + 2],
-            [this.x = x - 1, this.y = y - 2],
-            [this.x = x + 2, this.y = y + 1],
-            [this.x = x + 2, this.y = y - 1],
-            [this.x = x - 2, this.y = y + 1],
-            [this.x = x - 2, this.y = y - 1]
+        this.moves = [
+            [x + 1, y + 2],
+            [x + 1, y - 2],
+            [x - 1, y + 2],
+            [x - 1, y - 2],
+            [x + 2, y + 1],
+            [x + 2, y - 1],
+            [x - 2, y + 1],
+            [x - 2, y - 1]
         ];
     };
 };
 
-let zero = new Node(0, 0);
-
-let pastMove = [];
-
-function storedMove(node) {
-    pastMove.push(node);
-    console.log(pastMove);
-    return pastMove;
+class borders {
+    constructor(x, y) {
+        this.outOfBounds = [
+            [8, y],
+            [x, 8],
+            [-1, y],
+            [x, -1]
+        ];
+    };
 };
-storedMove(zero);
 
+class moves {
+    constructor(x, y) {
+        const pastMoves = [];
+    };
+};
+
+function calculateMoves(x, y) {
+
+    let knight = new Node(x, y);
+    console.log(knight);
+
+
+};
+
+calculateMoves(0, 0);
