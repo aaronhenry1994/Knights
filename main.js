@@ -40,20 +40,45 @@ class moves {
     };
 };
 
+let pastMoves = [];
+let knight = new Node(0, 0);
+console.log(knight);
+
 function calculateMoves(x, y) {
 
-    let knight = new Node(x, y);
-    console.log(knight);
-
-    let turn = new legalMoves(knight.x, knight.y);
+    let turn = new legalMoves(x, y);
 
     console.log(turn.moves);
 
     const randomMove = (array) => array[Math.floor(Math.random() * turn.moves.length)];
-    let final = randomMove(turn.moves);
+    knight = randomMove(turn.moves);
+    
+    if (turn.borders.some(border => knight[0] === border[0] && knight[1] === border[1])) {
+        calculateMoves(x, y);
+    };
 
-    return final;
+    return knight;
 };
 
-calculateMoves(0, 0);
-console.log(calculateMoves(0, 0))
+function chainMoves(x, y) {
+
+    let finish = 'You have made it to the goal';
+
+    let move = calculateMoves(x, y);
+    console.log(move)
+
+    let turn = new legalMoves(x, y);
+
+    pastMoves.push(move);
+
+    if (turn.goal.some(goal => move[0] === goal[0] && move[1] === goal[1])) {
+        return [finish, pastMoves];
+    } else {
+        chainMoves(move[0], move[1]);
+    };
+
+};
+
+let move = chainMoves(knight.x, knight.y);
+console.log(pastMoves);
+console.log(move);
