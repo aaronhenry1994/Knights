@@ -54,7 +54,7 @@ function calculateMoves(x, y) {
     knight = randomMove(turn.moves);
     
     if (turn.borders.some(border => knight[0] === border[0] && knight[1] === border[1])) {
-        calculateMoves(x, y);
+        return calculateMoves(x, y);
     };
 
     return knight;
@@ -71,14 +71,19 @@ function chainMoves(x, y) {
 
     pastMoves.push(move);
 
+    if (turn.borders.some(border => move[0] === border[0] && move[1] === border[1])) {
+        return;
+    };
+    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) {
+    return;
+    };
     if (turn.goal.some(goal => move[0] === goal[0] && move[1] === goal[1])) {
         return [finish, pastMoves];
     } else {
-        chainMoves(move[0], move[1]);
+        return chainMoves(move[0], move[1]);
     };
 
 };
 
 let move = chainMoves(knight.x, knight.y);
 console.log(pastMoves);
-console.log(move);
